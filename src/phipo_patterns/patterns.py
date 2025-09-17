@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# SPDX-FileCopyrightText: 2025-present Rothamsted Research
+#
+# SPDX-License-Identifier: MIT
 
 from __future__ import annotations
 
