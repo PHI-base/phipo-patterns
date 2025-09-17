@@ -121,7 +121,7 @@ def mark_merged_terms(df, alt_ids):
     """Add 'MERGED' to the 'error' column if the term ID of the row exists
     in the the list of alternative IDs."""
 
-    def marker(row):
+    def marker(row: pd.Series):
         merge_label = 'MERGED'
         if row.term in alt_ids:
             if pd.isna(row.error):
