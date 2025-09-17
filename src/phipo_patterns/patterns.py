@@ -533,7 +533,7 @@ def get_pattern_file_names(
     return pattern_file_names
 
 
-def main(args: argparse.Namespace) -> None:
+def main(args: argparse.Namespace, out_dir) -> None:
     """
     Update the pattern data files and the ``external.txt`` file in the PHIPO repository.
 
@@ -555,9 +555,9 @@ def main(args: argparse.Namespace) -> None:
 
     patterns_info = get_patterns_info(upheno_dir, pattern_definition_file_names)
     mapping_data_df = make_mapping_data_df(filtered_df)
-    write_ontology_term_labels(phipo_dir, args.robot_path)
+    write_ontology_term_labels(phipo_dir, out_dir, args.robot_path)
 
-    term_file_paths = Path('_out').glob('*.csv')
+    term_file_paths = Path(out_dir).glob('*.csv')
     id_label_mapping = load_id_label_mapping(term_file_paths)
 
     # Add an unmapped ID that wasn't exported for some reason
