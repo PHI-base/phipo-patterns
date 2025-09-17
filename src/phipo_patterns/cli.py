@@ -52,13 +52,19 @@ def parse_args(args: list[str]) -> argparse.Namespace:
     return parser.parse_args(args)
 
 
-def run(args):
-    args = parse_args(args)
+def run(args: list[str]) -> None:
+    """
+    Run the command-line for the phipo_patterns package.
+
+    :param args: command-line arguments from ``sys.argv``.
+    :type args: list[str]
+    """
+    parsed_args = parse_args(args)
     with tempfile.TemporaryDirectory() as temp_dir:
         patterns.update_phipo_patterns(
-            phipo_dir=args.ontology_dir,
-            upheno_dir=args.upheno_dir,
-            mapping_path=args.mapping_file,
-            robot_path=args.robot_path,
+            phipo_dir=parsed_args.ontology_dir,
+            upheno_dir=parsed_args.upheno_dir,
+            mapping_path=parsed_args.mapping_file,
+            robot_path=parsed_args.robot_path,
             id_label_mapping_dir=temp_dir,
         )
