@@ -5,7 +5,7 @@
 import argparse
 import tempfile
 
-from phipo_patterns import patterns
+from phipo_patterns import patterns, synchronize
 
 
 def parse_args(args: list[str]) -> argparse.Namespace:
@@ -18,37 +18,73 @@ def parse_args(args: list[str]) -> argparse.Namespace:
     :rtype: argparse.Namespace
     """
     parser = argparse.ArgumentParser(
-        prog='uPheno pattern maker',
+        prog='PHIPO pattern maker',
         description='Script to make phenotype patterns from the PHIPO pattern mapping spreadsheet.',
     )
-    parser.add_argument(
+    subparsers = parser.add_subparsers(dest='command', required=True)
+    parser_patterns = subparsers.add_parser('make_patterns')
+    parser_sync = subparsers.add_parser('sync_spreadsheet')
+
+    # arguments for make_patterns
+    parser_patterns.add_argument(
         '--mapping-file',
         metavar='PATH',
         type=str,
         required=True,
         help='path to the PHIPO pattern mapping CSV file',
     )
-    parser.add_argument(
+    parser_patterns.add_argument(
         '--ontology-dir',
         metavar='PATH',
         type=str,
         required=True,
         help='path to the PHIPO repository',
     )
-    parser.add_argument(
+    parser_patterns.add_argument(
         '--upheno-dir',
         metavar='PATH',
         type=str,
         required=True,
         help='path to the uPheno repository',
     )
-    parser.add_argument(
+    parser_patterns.add_argument(
         '--robot-path',
         metavar='PATH',
         type=str,
         required=True,
         help='path to the ROBOT JAR file',
     )
+
+    # arguments for sync_spreadsheet
+    parser_sync.add_argument(
+        '--mapping-file',
+        metavar='PATH',
+        type=str,
+        required=True,
+        help='path to the PHIPO pattern mapping CSV file',
+    )
+    parser_sync.add_argument(
+        '--ontology-dir',
+        metavar='PATH',
+        type=str,
+        required=True,
+        help='path to the PHIPO repository',
+    )
+    parser_sync.add_argument(
+        '--upheno-dir',
+        metavar='PATH',
+        type=str,
+        required=True,
+        help='path to the uPheno repository',
+    )
+    parser_sync.add_argument(
+        '--output',
+        metavar='PATH',
+        type=str,
+        required=True,
+        help='path to write the updated PHIPO pattern mapping CSV file',
+    )
+
     return parser.parse_args(args)
 
 
@@ -60,11 +96,23 @@ def run(args: list[str]) -> None:
     :type args: list[str]
     """
     parsed_args = parse_args(args)
-    with tempfile.TemporaryDirectory() as temp_dir:
-        patterns.update_phipo_patterns(
-            phipo_dir=parsed_args.ontology_dir,
-            upheno_dir=parsed_args.upheno_dir,
-            mapping_path=parsed_args.mapping_file,
-            robot_path=parsed_args.robot_path,
-            id_label_mapping_dir=temp_dir,
-        )
+    match parsed_args.command:
+        case 'make_patterns':
+            with tempfile.TemporaryDirectory() as temp_dir:
+                patterns.update_phipo_patterns(
+                    phipo_dir=parsed_args.ontology_dir,
+                    upheno_dir=parsed_args.upheno_dir,
+                    mapping_path=parsed_args.mapping_file,
+                    robot_path=parsed_args.robot_path,
+                    id_label_mapping_dir=temp_dir,
+                )
+        case 'sync_spreadsheet':
+            synchronize.sync_term_mapping_table(
+                spreadsheet_path=parsed_args.mapping_file,
+                phipo_dir=parsed_args.ontology_dir,
+                upheno_dir=parsed_args.upheno_dir,
+                out_path=parsed_args.output,
+            )
+        case _:
+            # argparse should prevent this from being reached
+            raise ValueError(f'unknown command: {parsed_args.command}')
