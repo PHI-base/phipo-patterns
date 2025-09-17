@@ -227,13 +227,13 @@ def load_upheno_pattern_file(path):
 
 
 def load_pattern_mapping_table(path):
-    spreadsheet_df = pd.read_csv(path, sep='\t')
+    spreadsheet_df = pd.read_csv(path)
     spreadsheet_df = set_index_to_term_number(spreadsheet_df)
     return spreadsheet_df
 
 
-def export_as_tsv(path, df):
-    df.to_csv(path, encoding='utf-8', sep='\t', index=False)
+def export_as_csv(path, df):
+    df.to_csv(path, encoding='utf-8', index=False)
 
 
 def sync_term_mapping_table(
@@ -295,4 +295,4 @@ def sync_term_mapping_table(
     assert columns_are_unchanged
     assert rows_have_been_added
 
-    export_as_tsv(out_path, export_df)
+    export_as_csv(out_path, export_df)
