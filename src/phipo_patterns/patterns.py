@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # SPDX-FileCopyrightText: 2025-present Rothamsted Research
 #
 # SPDX-License-Identifier: MIT
@@ -8,7 +7,6 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
-import sys
 from pathlib import Path
 from typing import Any, Collection, Iterable, Iterator, Mapping, Sequence
 
@@ -18,50 +16,6 @@ import yaml
 pd.set_option('future.no_silent_downcasting', True)
 
 OBO_ID_PATTERN = re.compile(r'^(?P<ns>[A-Za-z]+):(?P<id>\d+)$', re.ASCII)
-
-
-def parse_args(args: list[str]) -> argparse.Namespace:
-    """
-    Parse command-line arguments.
-
-    :param args: command-line arguments from ``sys.argv``.
-    :type args: list[str]
-    :returns: an ``argparse.Namespace`` containing parsed arguments.
-    :rtype: argparse.Namespace
-    """
-    parser = argparse.ArgumentParser(
-        prog='uPheno pattern maker',
-        description='Script to make phenotype patterns from the PHIPO pattern mapping spreadsheet.',
-    )
-    parser.add_argument(
-        '--mapping-file',
-        metavar='PATH',
-        type=str,
-        required=True,
-        help='path to the PHIPO pattern mapping CSV file',
-    )
-    parser.add_argument(
-        '--ontology-dir',
-        metavar='PATH',
-        type=str,
-        required=True,
-        help='path to the PHIPO repository',
-    )
-    parser.add_argument(
-        '--upheno-dir',
-        metavar='PATH',
-        type=str,
-        required=True,
-        help='path to the uPheno repository',
-    )
-    parser.add_argument(
-        '--robot-path',
-        metavar='PATH',
-        type=str,
-        required=True,
-        help='path to the ROBOT JAR file',
-    )
-    return parser.parse_args(args)
 
 
 def all_variables_imported(
@@ -617,8 +571,3 @@ def main(args: argparse.Namespace) -> None:
 
     pattern_filenames = data_file_dataframes.keys()
     update_external_txt(external_txt_path, pattern_filenames, upheno_dir)
-
-
-if __name__ == '__main__':
-    args = parse_args(sys.argv[1:])
-    main(args)
