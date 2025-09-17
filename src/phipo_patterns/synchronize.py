@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 from phipo_patterns import patterns
-from robot import Robot
+from phipo_patterns.robot import Robot
 
 OBO_ID_PATTERN = re.compile(r'^(?P<ns>[A-Za-z]+):(?P<id>\d+)$', re.ASCII)
 
