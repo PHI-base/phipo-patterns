@@ -543,8 +543,16 @@ def update_phipo_patterns(
     """
     Update the pattern data files and the ``external.txt`` file in the PHIPO repository.
 
-    :param args: parsed arguments from :func:`parse_args`.
-    :type args: argparse.Namespace
+    :param phipo_dir: path to the local PHIPO repository folder.
+    :type phipo_dir: pathlib.Path | str
+    :param upheno_dir: path to the local uPheno repository folder.
+    :type upheno_dir: pathlib.Path | str
+    :param mapping_path: path to the PHIPO pattern mapping CSV file.
+    :type mapping_path: pathlib.Path | str
+    :param robot_path: path to the ROBOT JAR file.
+    :type robot_path: pathlib.Path | str
+    :param id_label_mapping_dir: output directory for term ID to label mapping files.
+    :type id_label_mapping_dir: pathlib.Path | str
     """
     phipo_dir = Path(phipo_dir)
     pattern_data_dir = phipo_dir / 'src' / 'patterns' / 'data' / 'default'
