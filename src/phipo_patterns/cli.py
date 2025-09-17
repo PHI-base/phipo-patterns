@@ -3,6 +3,9 @@
 # SPDX-License-Identifier: MIT
 
 import argparse
+import tempfile
+
+from phipo_patterns import patterns
 
 
 def parse_args(args: list[str]) -> argparse.Namespace:
@@ -47,3 +50,15 @@ def parse_args(args: list[str]) -> argparse.Namespace:
         help='path to the ROBOT JAR file',
     )
     return parser.parse_args(args)
+
+
+def run(args):
+    args = parse_args(args)
+    with tempfile.TemporaryDirectory() as temp_dir:
+        patterns.update_phipo_patterns(
+            phipo_dir=args.ontology_dir,
+            upheno_dir=args.upheno_dir,
+            mapping_path=args.mapping_file,
+            robot_path=args.robot_path,
+            id_label_mapping_dir=temp_dir,
+        )
