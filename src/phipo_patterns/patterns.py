@@ -262,6 +262,7 @@ def make_data_file_dataframes(
     data_groups = mapping_data_df.groupby('path')
     filename_to_df_map: dict[str, pd.DataFrame] = {}
     for pattern_name, df in data_groups:
+        pattern_name = str(pattern_name)
         pattern_info = patterns_info.get(pattern_name)
         if not pattern_info:
             print(f'pattern not found {pattern_name}')
@@ -373,7 +374,7 @@ def write_ontology_term_labels(
     for path in iter_ontology_mirror_paths(phipo_dir):
         arg_dict['input'] = str(path)
         arg_dict['export'] = (out_dir / path.stem).with_suffix('.csv')
-        args = arg_dict.values()
+        args = list(arg_dict.values())
         subprocess.run(args, check=True)
 
 
