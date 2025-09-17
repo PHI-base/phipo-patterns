@@ -22,7 +22,10 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+  "pyyaml==6.0.1",
+  "pandas==2.2.2"
+]
 
 [project.urls]
 Documentation = "https://github.com/PHI-base/phipo-patterns#readme"
