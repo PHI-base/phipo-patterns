@@ -534,21 +534,26 @@ def get_pattern_file_names(
     return pattern_file_names
 
 
-def main(args: argparse.Namespace, out_dir) -> None:
+def update_phipo_patterns(
+    phipo_dir: Path | str,
+    upheno_dir: Path | str,
+    mapping_path: Path | str,
+    robot_path: Path | str,
+    out_dir: Path | str,
+) -> None:
     """
     Update the pattern data files and the ``external.txt`` file in the PHIPO repository.
 
     :param args: parsed arguments from :func:`parse_args`.
     :type args: argparse.Namespace
     """
-    phipo_dir = Path(args.ontology_dir)
-    upheno_dir = Path(args.upheno_dir)
+    phipo_dir = Path(phipo_dir)
     pattern_data_dir = phipo_dir / 'src' / 'patterns' / 'data' / 'default'
     external_txt_path = (
         phipo_dir / 'src' / 'patterns' / 'dosdp-patterns' / 'external.txt'
     )
 
-    mapping_df = load_pattern_mapping_file(args.mapping_file)
+    mapping_df = load_pattern_mapping_file(mapping_path)
     filtered_df = filter_mapping_df(mapping_df)
 
     pattern_file_names = get_pattern_file_names(filtered_df, upheno_dir)
@@ -556,7 +561,7 @@ def main(args: argparse.Namespace, out_dir) -> None:
 
     patterns_info = get_patterns_info(upheno_dir, pattern_definition_file_names)
     mapping_data_df = make_mapping_data_df(filtered_df)
-    write_ontology_term_labels(phipo_dir, out_dir, args.robot_path)
+    write_ontology_term_labels(phipo_dir, out_dir, robot_path)
 
     term_file_paths = Path(out_dir).glob('*.csv')
     id_label_mapping = load_id_label_mapping(term_file_paths)
