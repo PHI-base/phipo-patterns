@@ -21,7 +21,8 @@ OBO_ID_PATTERN = re.compile(r'^(?P<ns>[A-Za-z]+):(?P<id>\d+)$', re.ASCII)
 
 
 def iri_to_obo_id(series: pd.Series) -> pd.Series:
-    """Convert a series of OBOLibrary PURLs into OBO IDs.
+    """
+    Convert a series of OBOLibrary PURLs into OBO IDs.
 
     :param series: Series containing OBOLibrary PURLs (IRIs).
     :type series: pandas.Series
@@ -36,7 +37,8 @@ def iri_to_obo_id(series: pd.Series) -> pd.Series:
 def collapse_rows(
     df: pd.DataFrame, grouper: Optional[Any] = None, sep: str = ' '
 ) -> pd.DataFrame:
-    """Collapse rows with non-duplicate values into a single row. Defaults to grouping by index.
+    """
+    Collapse rows with non-duplicate values into a single row. Defaults to grouping by index.
 
     For each group, non-null values from each column are deduplicated and then
     joined using ``sep``. If any value in a grouped column is NaN, the
@@ -63,7 +65,8 @@ def collapse_rows(
 
 
 def is_newer(path1: Path | str, path2: Path | str) -> bool:
-    """Test if ``path1`` was modified more recently than ``path2``.
+    """
+    Test if ``path1`` was modified more recently than ``path2``.
 
     :param path1: first filesystem path.
     :type path1: Path | str
@@ -78,7 +81,8 @@ def is_newer(path1: Path | str, path2: Path | str) -> bool:
 def merge_phipo_dataframes(
     spreadsheet_df: pd.DataFrame, phipo_df: pd.DataFrame
 ) -> pd.DataFrame:
-    """Update the spreadsheet DataFrame with data from the PHIPO ontology
+    """
+    Update the spreadsheet DataFrame with data from the PHIPO ontology
     DataFrame, while preserving previous labels from the spreadsheet.
 
     :param spreadsheet_df: the PHIPO pattern mapping table.
@@ -116,7 +120,8 @@ def merge_phipo_dataframes(
 
 
 def fill_missing_indexes(df: pd.DataFrame) -> pd.DataFrame:
-    """Find gaps in the term index and fill them, leaving all columns NaN
+    """
+    Find gaps in the term index and fill them, leaving all columns NaN
     except the 'term' column (which is derived from the index).
 
     :param df: PHIPO pattern mapping table
@@ -134,7 +139,8 @@ def fill_missing_indexes(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def set_modified_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Set the 'modified' column to ``True`` where the previous label doesn't
+    """
+    Set the 'modified' column to ``True`` where the previous label doesn't
     match the current label.
 
     :param df: PHIPO pattern mapping table
@@ -149,7 +155,8 @@ def set_modified_column(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def clear_unchanged_labels(df: pd.DataFrame) -> pd.DataFrame:
-    """Clear previous term labels that are equal to current term labels.
+    """
+    Clear previous term labels that are equal to current term labels.
 
     :param df: PHIPO pattern mapping table
     :type df: pandas.DataFrame
@@ -163,7 +170,8 @@ def clear_unchanged_labels(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def all_terms_have_row(obj: pd.DataFrame | pd.Series) -> bool:
-    """Test if every row has a one-to-one mapping to a term ID.
+    """
+    Test if every row has a one-to-one mapping to a term ID.
 
     Term numbers must increase monotonically with no gaps between numbers. The
     check is performed on the index of the provided object (DataFrame or Series).
@@ -180,7 +188,8 @@ def all_terms_have_row(obj: pd.DataFrame | pd.Series) -> bool:
 
 
 def set_index_to_term_number(df: pd.DataFrame) -> pd.DataFrame:
-    """Set the index of the PHIPO pattern mapping table to the term number of the OBO ID from the 'term' column.
+    """
+    Set the index of the PHIPO pattern mapping table to the term number of the OBO ID from the 'term' column.
 
     :param df: PHIPO pattern mapping table
     :type df: pandas.DataFrame
@@ -198,7 +207,8 @@ def set_index_to_term_number(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def mark_merged_terms(df: pd.DataFrame, alt_ids: Container[str]) -> pd.DataFrame:
-    """Add 'MERGED' to the 'error' column if the term ID of the row
+    """
+    Add 'MERGED' to the 'error' column if the term ID of the row
     exists in the list of alternative OBO IDs.
 
     :param df: PHIPO pattern mapping table.
@@ -343,7 +353,8 @@ def fill_no_pattern_error(
 def fill_no_variable_error(
     df: pd.DataFrame, import_namespaces: Container[str]
 ) -> pd.DataFrame:
-    """Add the 'NO_VARIABLE' error for rows with missing, invalid, or non-imported variable term IDs.
+    """
+    Add the 'NO_VARIABLE' error for rows with missing, invalid, or non-imported variable term IDs.
 
     :param df: PHIPO pattern mapping table.
     :type df: pandas.DataFrame
@@ -444,7 +455,8 @@ def sync_term_mapping_table(
     upheno_dir: Path | str,
     out_path: Path | str,
 ) -> None:
-    """Synchronize the term mapping table with the latest PHIPO and uPheno data.
+    """
+    Synchronize the term mapping table with the latest PHIPO and uPheno data.
 
     Load the PHIPO pattern mapping table, use the ROBOT tool to query information from the working copy of PHIPO, merge new information into the pattern mapping table, update the 'error' column, and export as CSV.
 
