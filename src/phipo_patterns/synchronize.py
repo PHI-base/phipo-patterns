@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: MIT
 from __future__ import annotations
 
+import importlib.resources
 import itertools
 import os
-import importlib.resources
 import re
 import tempfile
 from pathlib import Path
