@@ -1,7 +1,21 @@
 {
+    "cSpell.language": "en-US",
     "cSpell.words": [
+        "CHEBI",
+        "dosdp",
         "downcasting",
+        "isin",
+        "mypy",
+        "PATO",
+        "phipo",
+        "pkgs",
+        "pycache",
+        "pyyaml",
+        "rdfs",
+        "Rothamsted",
         "rtype",
-        "sparql"
+        "Seager",
+        "sparql",
+        "upheno"
     ]
 }
