@@ -490,7 +490,11 @@ def sync_term_mapping_table(
 
     # Extract PHIPO term data as a table
     with tempfile.NamedTemporaryFile() as term_data_path:
-        robot.query(query=query_path, input_path=phipo_path, output_path=term_data_path)
+        robot.query(
+            query=str(query_path),
+            input_path=str(phipo_path),
+            output_path=str(term_data_path),
+        )
         phipo_df = pd.read_csv(term_data_path)
 
     phipo_df = set_index_to_term_number(phipo_df)
