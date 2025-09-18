@@ -31,7 +31,6 @@ class Robot:
 
         :returns: full path to the robot.jar file.
         :rtype: str
-
         :raises FileNotFoundError: if robot.jar is not found in any PATH directory ending with 'robot'.
         """
         env_path = os.environ['PATH']
@@ -75,7 +74,9 @@ class Robot:
         """
         self.__run(f'query --input {input_path} --query {query} {output_path}')
 
-    def export(self, input_path: str, output_path: str, header: str = 'ID|LABEL') -> None:
+    def export(
+        self, input_path: str, output_path: str, header: str = 'ID|LABEL'
+    ) -> None:
         """
         Export classes from an ontology file to a tabular format.
 
