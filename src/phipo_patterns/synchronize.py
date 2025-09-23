@@ -476,16 +476,13 @@ def sync_term_mapping_table(
         / 'phipo_metadata_table.sparql'
     )
     import_namespaces = {'IDO', 'GO', 'RO', 'CHEBI', 'PATO', 'SO', 'CL'}
-
     upheno_pattern_definition_paths = patterns.iter_upheno_pattern_definition_paths(
         upheno_dir
     )
     upheno_patterns = list(
         patterns.iter_normalized_pattern_names(upheno_pattern_definition_paths)
     )
-
     spreadsheet_df = load_pattern_mapping_table(spreadsheet_path)
-
     robot = Robot()
 
     # Extract PHIPO term data as a table
@@ -503,9 +500,7 @@ def sync_term_mapping_table(
     phipo_df.term = iri_to_obo_id(phipo_df.term)
 
     merged_df = merge_phipo_dataframes(spreadsheet_df, phipo_df)
-
     assert all_terms_have_row(merged_df)
-
     merged_df = set_modified_column(merged_df)
     merged_df = mark_merged_terms(merged_df, alt_ids)
     merged_df = fill_no_pattern_error(merged_df, upheno_patterns)
