@@ -270,8 +270,8 @@ def merge_error(df: pd.DataFrame, indexer: pd.Series, error_value: str) -> pd.Da
     :rtype: pandas.DataFrame
     """
     df2 = df.copy()
-    df2.error.loc[indexer] = (
-        df.error.loc[indexer]
+    df2.loc[indexer, 'error'] = (
+        df2.loc[indexer, 'error']
         .fillna('')  # the merge_value function only handles strings
         .apply(lambda x: merge_value(error_value, x, sep=', '))
     )
