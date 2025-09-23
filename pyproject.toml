@@ -35,6 +35,11 @@ Source = "https://github.com/PHI-base/phipo-patterns"
 [tool.hatch.version]
 path = "src/phipo_patterns/__about__.py"
 
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+]
+
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
