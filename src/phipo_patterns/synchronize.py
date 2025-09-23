@@ -486,8 +486,8 @@ def sync_term_mapping_table(
     robot = Robot()
 
     # Extract PHIPO term data as a table
-    with tempfile.NamedTemporaryFile() as term_data_file:
-        term_data_path = term_data_file.name
+    with tempfile.TemporaryDirectory() as tmpdir:
+        term_data_path = Path(tmpdir) / 'phipo_terms.csv'
         robot.query(
             query=str(query_path),
             input_path=str(phipo_path),
