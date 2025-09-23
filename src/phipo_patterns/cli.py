@@ -18,7 +18,7 @@ def parse_args(args: list[str]) -> argparse.Namespace:
     :rtype: argparse.Namespace
     """
     parser = argparse.ArgumentParser(
-        prog='PHIPO pattern maker',
+        prog='phipo_patterns',
         description='Script to make phenotype patterns from the PHIPO pattern mapping spreadsheet.',
     )
     subparsers = parser.add_subparsers(dest='command', required=True)
