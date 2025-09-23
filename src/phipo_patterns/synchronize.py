@@ -469,7 +469,7 @@ def sync_term_mapping_table(
     :param out_path: destination path for the updated pattern mapping table.
     :type out_path: Path | str
     """
-    phipo_path = Path(phipo_dir) / 'src' / 'ontology' / 'phipo_edit.owl'
+    phipo_path = Path(phipo_dir) / 'src' / 'ontology' / 'phipo-edit.owl'
     query_path = (
         importlib.resources.files('phipo_patterns')
         / 'queries'
