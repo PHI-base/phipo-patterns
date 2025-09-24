@@ -11,13 +11,13 @@ An example of the columns used in the pattern mapping table can be seen in the f
 Install the latest release from GitHub:
 
 ```
-python -m pip install 'phipo_patterns@git+https://github.com/PHI-base/phipo-patterns.git@0.2.0'
+python -m pip install phipo_patterns@git+https://github.com/PHI-base/phipo-patterns.git@v0.2.1
 ```
 
 Or install the latest commit on the `main` branch:
 
 ```
-python -m pip install 'phipo_patterns@git+https://github.com/PHI-base/phipo-patterns.git@main'
+python -m pip install phipo_patterns@git+https://github.com/PHI-base/phipo-patterns.git@main
 ```
 
 ## Usage
