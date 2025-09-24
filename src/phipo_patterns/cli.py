@@ -22,8 +22,16 @@ def parse_args(args: list[str]) -> argparse.Namespace:
         description='Manage the PHIPO pattern mapping table and phenotype patterns.',
     )
     subparsers = parser.add_subparsers(dest='command', required=True)
-    parser_patterns = subparsers.add_parser('make_patterns')
-    parser_sync = subparsers.add_parser('sync_spreadsheet')
+    parser_patterns = subparsers.add_parser(
+        name='make_patterns',
+        description=(
+            'Make pattern data files from the PHIPO pattern mapping table and update the list of external patterns.'
+        ),
+    )
+    parser_sync = subparsers.add_parser(
+        name='sync_spreadsheet',
+        description='Synchronize the PHIPO pattern mapping table with the latest version of PHIPO and the latest patterns from uPheno.',
+    )
 
     # arguments for make_patterns
     parser_patterns.add_argument(
