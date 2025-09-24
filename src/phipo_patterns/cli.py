@@ -29,7 +29,7 @@ def parse_args(args: list[str]) -> argparse.Namespace:
         ),
     )
     parser_sync = subparsers.add_parser(
-        name='sync_spreadsheet',
+        name='sync_mapping',
         description='Synchronize the PHIPO pattern mapping table with the latest version of PHIPO and the latest patterns from uPheno.',
     )
 
